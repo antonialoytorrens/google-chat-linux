@@ -1,0 +1,45 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE = 1
+
+# Disable npm's update notifier
+export NO_UPDATE_NOTIFIER = 1
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	npm run pack
+
+override_dh_auto_install:
+	# Install the unpacked Electron app to /opt
+	install -d $(CURDIR)/debian/google-chat-linux/opt/google-chat-linux
+	cp -a $(CURDIR)/dist/linux-unpacked/. \
+		$(CURDIR)/debian/google-chat-linux/opt/google-chat-linux/
+
+	# Wrapper script in /usr/bin
+	install -d $(CURDIR)/debian/google-chat-linux/usr/bin
+	install -m 755 $(CURDIR)/debian/google-chat-linux.sh \
+		$(CURDIR)/debian/google-chat-linux/usr/bin/google-chat-linux
+
+	# Desktop file
+	install -d $(CURDIR)/debian/google-chat-linux/usr/share/applications
+	install -m 644 $(CURDIR)/debian/google-chat-linux.desktop \
+		$(CURDIR)/debian/google-chat-linux/usr/share/applications/
+
+	# Icons
+	install -d $(CURDIR)/debian/google-chat-linux/usr/share/icons/hicolor/48x48/apps
+	install -d $(CURDIR)/debian/google-chat-linux/usr/share/icons/hicolor/64x64/apps
+	install -d $(CURDIR)/debian/google-chat-linux/usr/share/icons/hicolor/256x256/apps
+	install -m 644 $(CURDIR)/build/icons/48.png \
+		$(CURDIR)/debian/google-chat-linux/usr/share/icons/hicolor/48x48/apps/google-chat-linux.png
+	install -m 644 $(CURDIR)/build/icons/64.png \
+		$(CURDIR)/debian/google-chat-linux/usr/share/icons/hicolor/64x64/apps/google-chat-linux.png
+	install -m 644 $(CURDIR)/build/icons/256.png \
+		$(CURDIR)/debian/google-chat-linux/usr/share/icons/hicolor/256x256/apps/google-chat-linux.png
+
+override_dh_auto_test:
+	# No tests
+
+override_dh_auto_clean:
+	rm -rf dist

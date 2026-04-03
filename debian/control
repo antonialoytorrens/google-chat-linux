@@ -1,0 +1,17 @@
+Source: google-chat-linux
+Section: net
+Priority: optional
+Maintainer: Antoni Aloy Torrens <aaloytorrens@gmail.com>
+Build-Depends: debhelper-compat (= 13), nodejs, npm
+Standards-Version: 4.6.2
+Homepage: https://github.com/squalou/google-chat-linux
+Rules-Requires-Root: no
+
+Package: google-chat-linux
+Architecture: amd64
+Depends: ${misc:Depends}, xdg-desktop-portal
+Description: Unofficial alternative Google Chat desktop app
+ An unofficial Google Chat desktop application for Linux,
+ built with Electron. Provides a native-feeling desktop
+ experience for Google Chat with system tray support,
+ desktop notifications, and protocol handler for gchat:// URLs.

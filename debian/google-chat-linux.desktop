@@ -1,0 +1,14 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Google Chat
+GenericName=Web Chat
+Comment=Google Chat
+Exec=google-chat-linux %u
+Terminal=false
+Icon=google-chat-linux
+StartupWMClass=google-chat-linux
+Categories=Network;InstantMessaging;
+MimeType=x-scheme-handler/gchat;
+Keywords=InstantMessaging;Chat;
+X-GNOME-FullName=Google Chat Linux
