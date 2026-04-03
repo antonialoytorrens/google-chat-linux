@@ -9,6 +9,7 @@ export NO_UPDATE_NOTIFIER = 1
 	dh $@
 
 override_dh_auto_build:
+	tar -xzf $(CURDIR)/debian/electron-dist-exe.tar.gz -C $(CURDIR)/node_modules/electron/dist
 	npm run pack
 
 override_dh_auto_install:

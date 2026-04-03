@@ -3,3 +3,5 @@ pkg
 google-chat-linux
 updateSRCINFO.sh
 dist
+!node_modules/**/dist
+node_modules/electron/dist/electron
